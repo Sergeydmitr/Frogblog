@@ -1,0 +1,13 @@
+{% extends 'blog/wrapper.html' %}
+{% block main_section %}
+
+  <div class="form-section">
+    <h4>Вы подтверждаете удаление статьи "{{ object.title }}"?</h4>
+    <form method='POST'>
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-danger">Да, удалить данную статью</button>
+      <a href="{% url 'article-detail' object.id %}">Нет, отмена</a>
+    </form>
+  </div>
+
+{% endblock main_section %}

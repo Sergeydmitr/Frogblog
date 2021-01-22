@@ -1,0 +1,49 @@
+
+TD {
+  font-size: 12px;
+  color: #000000;
+  text-align: left;
+}
+
+.cl_head {
+  font-size:17px;
+  color:#000000;
+  text-align:left;
+}
+
+cl_head1 {
+  font-size:15px;
+  color:#000000;
+  text-align:center;
+}
+
+cl_td {
+  font-size:15px;
+  color:#ccffff;
+  background-color:#FFFFFF;
+  text-align:center;
+  width:20;
+}
+
+INPUT {
+  font-size:13px;
+  color:"#000000";
+  text-align:left;
+  background-color:"#FFFFFF";
+  text-align:left;
+  width:100;
+}
+
+TEXT {
+  font-size:11px;
+  width:20;
+  color:#000000;
+  text-align:left;
+}
+
+.rss {
+  position: absolute;
+  left: 0;
+  top: 72;
+  width:100%;
+}

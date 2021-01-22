@@ -1,0 +1,39 @@
+{% extends 'blog/wrapper.html' %}
+{% load static %}
+{% block main_section %}
+
+  <h2>О сайте Держижабль</h2>
+  <br><br>
+  <p class="h4">
+    <img src="{% static 'blog/code.svg' %}" width="32" height="32" align="middle" class="mr-3">
+    <small>
+    Сайт разработан на базе фреймворка Django для Python.
+    </small>
+  </p>
+    <br><br>
+  <p class="h4">
+    <img src="{% static 'blog/users.svg' %}" width="32" height="32" align="middle" class="mr-3">
+    <small>
+    Реализована система регистрации и авторизации пользователей, добавление
+    аватарки и прочей информации о пользователе.
+    </small>
+  </p>
+    <br><br>
+  <p class="h4">
+    <img src="{% static 'blog/archive.svg' %}" width="32" height="32" align="middle" class="mr-3">
+    <small>
+    Реализована система добавления и вывода списка статей, подробной страницы
+    со статьёй, а так же фильтрация статей по автору, списки статей выводятся с
+    пагинацией.
+    </small>
+  </p>
+    <br><br>
+  <p class="h4">
+    <img src="{% static 'blog/shield.svg' %}" width="32" height="32" align="middle" class="mr-3">
+    <small>
+    Сайт развёрнут на удалённом сервере при помощи Nginx, привязан к домену,
+    имеет защиту от SQL инъекций, а так же использует криптографический протокол TLS.
+    </small>
+  </p>
+
+{% endblock main_section %}

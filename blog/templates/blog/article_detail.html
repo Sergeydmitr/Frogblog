@@ -1,0 +1,106 @@
+{% extends 'blog/wrapper.html' %}
+{% load crispy_forms_tags %}
+{% load pluralize %}
+{% block main_section %}
+
+  <div class="alert alert-info">
+    <a href="{% url 'index' %}">Вернуться на главную</a>
+    <h1>{{ object.title }}</h1>
+    <p>{{ object.text|safe }}</p>
+    <div class="row">
+      <div>
+        {% if object.author.profile.img %}
+          <img src="{{ object.author.profile.img.url }}" alt="{{ object.author }}" class="user_image">
+        {% else %}
+          <img src="/media/default.jpg" alt="{{ object.author }}" class="user_image">
+        {% endif %}
+      </div>
+      <div class="mt-2">
+        <span class="text-muted">Дата публикации: {{ object.date }}</span>
+        <p><b>Автор:</b> <a href="{% url 'user-articles' object.author %}">{{ object.author }}</a></p>
+      </div>
+    </div>
+    <br>
+    {% if object.author == user %}
+      <a href="{% url 'article-edit' object.id %}" class="btn btn-info">Редактировать статью</a>
+      <a href="{% url 'article-delete' object.id %}" class="btn btn-danger">Удалить статью</a>
+    {% endif %}
+
+
+<div class="mt-3">
+  <a name="comments-section"></a>
+    {% if comments %}
+      <h3 class="mb-3">{{ comments.count }} {{ comments.count|rupluralize:"комментарий,комментария,комментариев" }}</h3>
+      <ul>
+        {% for el in comments %}
+        <li class="mt-2">
+          <strong>
+            {{ el.author }}
+          </strong>
+          <span class="text-muted">
+            {{ el.date|timesince }} назад
+          </span>
+          <p class="mt-2">
+            {{ el.text|safe }}
+          </p>
+          {% if el.author == user %}
+            <form method="post" action="{% url 'delete-comment' el.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Удалить комментарий</button>
+            </form>
+          {% endif %}
+          <hr>
+        </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Нет комментариев</p>
+    {% endif %}
+
+
+    {% if user.is_authenticated %}
+      <div class="form-section">
+        <form method='POST'>
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn btn-outline-success">Добавить комментарий</button>
+        </form>
+      </div>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn btn-outline-success">Авторизуйтесь, чтобы добавить комментарий</a>
+    {% endif %}
+  </div>
+<!--
+    <h2>Новый комментарий</h2>
+    <form method='POST'>
+      {% csrf_token %}
+
+      {{ form.as_p }}<br>
+      <button type="submit" class="btn btn-outline-success">Добавить комментарий</button>
+    </form>
+
+    <hr> -->
+<!--
+    <div id="disqus_thread"></div>
+    <script>
+
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+      var disqus_config = function () {
+        this.page.url = "https://frogblog.site/article/{{ object.id }}";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "/{{ object.id }}/"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://frogblog-5.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Пожалуйста, включите JavaScript в своём браузере чтобы увидеть <a href="https://disqus.com/?ref_noscript">комментарии созданные при помощи Disqus.</a></noscript>
+ -->
+  </div>
+
+{% endblock main_section %}
