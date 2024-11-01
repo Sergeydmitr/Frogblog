@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "frogblog"
+version = "0.1.0"
+description = ""
+authors = ["Sergey Dmitrenko <sdmitrenko@ptsecurity.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.1.2"
+django-crispy-forms = "^2.3"
+pillow = "^11.0.0"
+pytz = "^2024.2"
+sqlparse = "^0.5.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
